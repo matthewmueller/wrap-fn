@@ -1,0 +1,11 @@
+.DS_Store
+.svn
+*~
+*.swp
+*.rbc
+build.js
+
+node_modules
+/components
+
+npm-debug.log
