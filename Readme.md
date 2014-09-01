@@ -26,7 +26,7 @@ function *fn(a, b) {
 }
 
 function next(err) {
-  Called after
+  // Called after
 }
 
 wrap(fn, next)('a', 'b')
