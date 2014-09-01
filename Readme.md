@@ -34,11 +34,11 @@ wrap(fn, next)('a', 'b')
 
 ## API
 
-### `wrap(fn, [done])`
+### `wrap(fn, [done])([args, ...])`
 
 Wrap `fn` to support sync, async and generator functions. Call `done` when finished.
 
-`wrap` returns a functio which you can pass arguments to or set the context.
+`wrap` returns a function which you can pass arguments to or set the context.
 
 ```js
 wrap(fn).call(user, a, b, c, d);
