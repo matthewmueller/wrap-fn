@@ -41,7 +41,7 @@ function wrap(fn, done) {
     } else {
       // sync
       var ret = fn.apply(ctx, args);
-      ret instanceof Error ? done(ret) : done();
+      ret instanceof Error ? done(ret) : done(null, ret);
     }
   }
 }

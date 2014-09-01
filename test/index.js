@@ -36,9 +36,11 @@ describe('wrap-fn', function() {
         assert('a' == a);
         assert('b' == b);
         called++;
+        return 'a';
       }
 
-      function next(err) {
+      function next(err, a) {
+        assert('a' == a);
         assert(called);
         assert(!err);
         done();
