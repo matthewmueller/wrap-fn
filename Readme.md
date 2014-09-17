@@ -1,7 +1,7 @@
 
 # wrap-fn
 
-  Low-level wrapper to support sync, async, and generator functions.
+  Low-level wrapper to support sync, async, promises, and generator functions.
 
 ## Installation
 
@@ -36,7 +36,7 @@ wrap(fn, next)('a', 'b')
 
 ### `wrap(fn, [done])([args, ...])`
 
-Wrap `fn` to support sync, async and generator functions. Call `done` when finished.
+Wrap `fn` to support sync, async, promises and generator functions. Call `done` when finished.
 
 `wrap` returns a function which you can pass arguments to or set the context.
 
