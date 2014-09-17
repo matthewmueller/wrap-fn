@@ -70,13 +70,86 @@ describe('wrap-fn', function() {
 
       wrap(sync, next).call({ ctx: 'ctx' }, 'a', 'b')
     });
+
+    it('catch synchronous errors', function(done) {
+      var called = 0;
+
+      function sync(a, b) {
+        called++;
+        assert(this.ctx = 'ctx');
+        assert('a' == a);
+        assert('b' == b);
+
+        throw new Error('some error');
+      }
+
+      function next(err) {
+        assert(err);
+        assert(called);
+        assert('some error' == err.message);
+        done();
+      }
+
+      wrap(sync, next).call({ ctx: 'ctx' }, 'a', 'b')
+    });
+
+    it('should support promises', function(done) {
+      var called = 0;
+
+      function promise(a) {
+        assert(this.ctx = 'ctx');
+        assert('a' == a);
+        called++;
+
+        return {
+          then: function (resolve) {
+            resolve(a);
+          }
+        };
+      }
+
+      function next(err, a) {
+        assert('a' == a);
+        assert(called);
+        assert(!err);
+        done();
+      }
+
+      wrap(promise, next).call({ ctx: 'ctx' }, 'a')
+    });
+
+    it('handle promise errors', function(done) {
+      var called = 0;
+
+      function promise(a, b) {
+        assert(this.ctx = 'ctx');
+        assert('a' == a);
+        assert('b' == b);
+        called++;
+
+        return {
+          then: function (resolve, reject) {
+            reject(new Error('some error'));
+          }
+        }
+      }
+
+      function next(err) {
+        assert(err);
+        assert(called);
+        assert('some error' == err.message);
+        done();
+      }
+
+      wrap(promise, next).call({ ctx: 'ctx' }, 'a', 'b')
+    });
   })
 
   describe('async', function(done) {
     it('should pass args and preserve context', function(done) {
       var called = 0;
 
-      function sync(a, b, fn) {
+      function async(a, b, fn) {
         assert(this.ctx = 'ctx');
         assert('a' == a);
         assert('b' == b);
@@ -92,13 +165,13 @@ describe('wrap-fn', function() {
         done();
       }
 
-      wrap(sync, next).call({ ctx: 'ctx' }, 'a', 'b')
+      wrap(async, next).call({ ctx: 'ctx' }, 'a', 'b')
     });
 
     it('handle errors', function(done) {
       var called = 0;
 
-      function sync(a, b, fn) {
+      function async(a, b, fn) {
         called++;
         assert(this.ctx = 'ctx');
         assert('a' == a);
@@ -113,7 +186,7 @@ describe('wrap-fn', function() {
         done();
       }
 
-      wrap(sync, next).call({ ctx: 'ctx' }, 'a', 'b')
+      wrap(async, next).call({ ctx: 'ctx' }, 'a', 'b')
     });
   })
 
@@ -125,7 +198,7 @@ describe('wrap-fn', function() {
         assert(this.ctx = 'ctx');
         assert('a' == a);
         assert('b' == b);
-        yield wait(100);
+        yield process.nextTick;
         called++;
         return a;
       }
@@ -163,13 +236,4 @@ describe('wrap-fn', function() {
       wrap(gen, next).call({ ctx: 'ctx' }, 'a', 'b')
     });
   })
-
 });
-
-function wait(ms) {
-  return function(fn) {
-    setTimeout(fn, ms);
-  }
-}
-
-
