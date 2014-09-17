@@ -2,6 +2,9 @@
   "name": "wrap-fn",
   "version": "0.0.2",
   "description": "support sync, async, and generator functions",
+  "scripts": {
+    "test": "make test"
+  },
   "keywords": [
     "browser",
     "wrap",
