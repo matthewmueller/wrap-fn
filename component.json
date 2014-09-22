@@ -8,5 +8,8 @@
   "development": {
     "component/assert": "*",
     "matthewmueller/generator-support": "*"
-  }
+  },
+  "scripts": [
+    "index.js"
+  ]
 }
