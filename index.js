@@ -2,7 +2,6 @@
  * Module Dependencies
  */
 
-var slice = [].slice;
 var co = require('co');
 var noop = function(){};
 
@@ -26,7 +25,12 @@ function wrap(fn, done) {
   done = done || noop;
 
   return function() {
-    var args = slice.call(arguments);
+    // prevents arguments leakage
+    // see https://github.com/petkaantonov/bluebird/wiki/Optimization-killers#3-managing-arguments
+    var i = arguments.length;
+    var args = new Array(i);
+    while (i--) args[i] = arguments[i];
+
     var ctx = this;
 
     // done
