@@ -2,8 +2,8 @@
  * Module Dependencies
  */
 
-var co = require('co');
 var noop = function(){};
+var co = require('co');
 
 /**
  * Export `wrap-fn`
@@ -22,7 +22,7 @@ module.exports = wrap;
  */
 
 function wrap(fn, done) {
-  done = done || noop;
+  done = once(done || noop);
 
   return function() {
     // prevents arguments leakage
@@ -40,7 +40,12 @@ function wrap(fn, done) {
 
     // async
     if (fn.length > args.length) {
-      return fn.apply(ctx, args.concat(done));
+      // NOTE: this only handles uncaught synchronous errors
+      try {
+        fn.apply(ctx, args.concat(done));
+      } catch (e) {
+        done(e);
+      }
     }
 
     // generator
@@ -105,4 +110,16 @@ function generator(value) {
 
 function promise(value) {
   return value && 'function' == typeof value.then;
+}
+
+/**
+ * Once
+ */
+
+function once(fn) {
+  return function() {
+    var ret = fn.apply(this, arguments);
+    fn = noop;
+    return ret;
+  };
 }

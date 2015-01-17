@@ -188,6 +188,27 @@ describe('wrap-fn', function() {
 
       wrap(async, next).call({ ctx: 'ctx' }, 'a', 'b')
     });
+
+    it('should catch errors', function(done) {
+      var called = 0;
+
+      function async(a, b, fn) {
+        called++;
+        assert(this.ctx = 'ctx');
+        assert('a' == a);
+        assert('b' == b);
+        throw new Error('some error');
+      }
+
+      function next(err, a, b) {
+        assert(err);
+        assert(called);
+        assert('some error' == err.message);
+        done();
+      }
+
+      wrap(async, next).call({ ctx: 'ctx' }, 'a', 'b')
+    })
   })
 
   describe('generator', function() {
