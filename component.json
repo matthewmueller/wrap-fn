@@ -1,6 +1,6 @@
 {
   "name": "wrap-fn",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "support sync, async, and generator functions",
   "dependencies": {
     "visionmedia/co": "3.1.0"
