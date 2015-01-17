@@ -42,9 +42,9 @@ function wrap(fn, done) {
     if (fn.length > args.length) {
       // NOTE: this only handles uncaught synchronous errors
       try {
-        fn.apply(ctx, args.concat(done));
+        return fn.apply(ctx, args.concat(done));
       } catch (e) {
-        done(e);
+        return done(e);
       }
     }
 
