@@ -1,4 +1,9 @@
 
+0.1.2 / 2015-01-16
+==================
+
+  * catch uncaught synchronous errors in async functions
+
 0.1.1 / 2014-09-24
 ==================
 
