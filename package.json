@@ -26,5 +26,8 @@
     "mocha": "*",
     "should": "*"
   },
-  "main": "index"
+  "main": "index",
+  "files": [
+    "index.js"
+  ]
 }
