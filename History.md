@@ -1,4 +1,11 @@
 
+0.1.4 / 2015-01-21
+==================
+
+  * slim down the package
+  * Use `files` property in package.json
+  * Rename component dependency `visionmedia/co` to `tj/co`
+
 0.1.3 / 2015-01-16
 ==================
 
