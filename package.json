@@ -11,10 +11,7 @@
     "generator"
   ],
   "author": "Matthew Mueller <mattmuelle@gmail.com>",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/MatthewMueller/wrap-fn.git"
-  },
+  "repository": "MatthewMueller/wrap-fn",
   "dependencies": {
     "co": "3.1.0"
   },
@@ -26,7 +23,6 @@
     "mocha": "*",
     "should": "*"
   },
-  "main": "index",
   "files": [
     "index.js"
   ]
