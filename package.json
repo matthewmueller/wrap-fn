@@ -1,6 +1,7 @@
 {
   "name": "wrap-fn",
   "version": "0.1.4",
+  "license": "MIT",
   "description": "support sync, async, and generator functions",
   "scripts": {
     "test": "make test"
