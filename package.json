@@ -1,8 +1,8 @@
 {
-  "name": "wrap-fn",
-  "version": "0.1.4",
+  "name": "wrapped",
+  "version": "1.0.0",
   "license": "MIT",
-  "description": "support sync, async, and generator functions",
+  "description": "consistent interface for ",
   "scripts": {
     "test": "make test"
   },
@@ -12,17 +12,13 @@
     "generator"
   ],
   "author": "Matthew Mueller <mattmuelle@gmail.com>",
-  "repository": "MatthewMueller/wrap-fn",
+  "repository": "MatthewMueller/wrapped",
   "dependencies": {
-    "co": "3.1.0"
+    "co": "3.1.0",
+    "sliced": "^1.0.1"
   },
   "devDependencies": {
-    "duo": "^0.8.2",
-    "duo-test": "^0.3.2",
-    "generator-support": "0.0.1",
-    "gnode": "0.0.8",
-    "mocha": "*",
-    "should": "*"
+    "generator-support": "0.0.1"
   },
   "files": [
     "index.js"
