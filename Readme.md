@@ -1,5 +1,5 @@
 
-**Deprecated in favor of: [wrapped](https://github.com/matthewmueller/wrapped).
+**Deprecated in favor of: [wrapped](https://github.com/matthewmueller/wrapped).**
 
 # wrap-fn
 
