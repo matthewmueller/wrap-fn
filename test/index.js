@@ -23,7 +23,7 @@ describe('wrap-fn', function() {
         done();
       }
 
-      wrap(null).call({ ctx: 'ctx'}, 'a', 'b', next);
+      wrap(null, next).call({ ctx: 'ctx'}, 'a', 'b');
     })
   })
 
@@ -46,7 +46,7 @@ describe('wrap-fn', function() {
         done();
       }
 
-      wrap(sync).call({ ctx: 'ctx' }, 'a', 'b', next)
+      wrap(sync, next).call({ ctx: 'ctx' }, 'a', 'b')
     });
 
     it('handle errors', function(done) {
@@ -68,7 +68,7 @@ describe('wrap-fn', function() {
         done();
       }
 
-      wrap(sync).call({ ctx: 'ctx' }, 'a', 'b', next)
+      wrap(sync, next).call({ ctx: 'ctx' }, 'a', 'b')
     });
 
     it('catch synchronous errors', function(done) {
@@ -90,7 +90,7 @@ describe('wrap-fn', function() {
         done();
       }
 
-      wrap(sync).call({ ctx: 'ctx' }, 'a', 'b', next)
+      wrap(sync, next).call({ ctx: 'ctx' }, 'a', 'b')
     });
 
     it('should support promises', function(done) {
@@ -115,7 +115,7 @@ describe('wrap-fn', function() {
         done();
       }
 
-      wrap(promise).call({ ctx: 'ctx' }, 'a', next)
+      wrap(promise, next).call({ ctx: 'ctx' }, 'a')
     });
 
     it('handle promise errors', function(done) {
@@ -141,7 +141,7 @@ describe('wrap-fn', function() {
         done();
       }
 
-      wrap(promise).call({ ctx: 'ctx' }, 'a', 'b', next)
+      wrap(promise, next).call({ ctx: 'ctx' }, 'a', 'b')
     });
   })
 
@@ -165,7 +165,7 @@ describe('wrap-fn', function() {
         done();
       }
 
-      wrap(async).call({ ctx: 'ctx' }, 'a', 'b', next)
+      wrap(async, next).call({ ctx: 'ctx' }, 'a', 'b')
     });
 
     it('handle errors', function(done) {
@@ -186,7 +186,7 @@ describe('wrap-fn', function() {
         done();
       }
 
-      wrap(async).call({ ctx: 'ctx' }, 'a', 'b', next)
+      wrap(async, next).call({ ctx: 'ctx' }, 'a', 'b')
     });
 
     it('should catch errors', function(done) {
@@ -207,7 +207,7 @@ describe('wrap-fn', function() {
         done();
       }
 
-      wrap(async).call({ ctx: 'ctx' }, 'a', 'b', next)
+      wrap(async, next).call({ ctx: 'ctx' }, 'a', 'b')
     })
   })
 
@@ -231,7 +231,7 @@ describe('wrap-fn', function() {
         done();
       }
 
-      wrap(gen).call({ ctx: 'ctx' }, 'a', 'b', next)
+      wrap(gen, next).call({ ctx: 'ctx' }, 'a', 'b')
     });
 
     it('handle errors', function(done) {
@@ -254,7 +254,7 @@ describe('wrap-fn', function() {
         done();
       }
 
-      wrap(gen).call({ ctx: 'ctx' }, 'a', 'b', next)
+      wrap(gen, next).call({ ctx: 'ctx' }, 'a', 'b')
     });
   })
 });

@@ -1,22 +1,20 @@
 
-# wrapped
+# wrap-fn
 
-  Low-level wrapper to provide a consistent interface for sync, async, promises, and generator functions.
-
-  Works with node.js and in the browser.
+  Low-level wrapper to support sync, async, promises, and generator functions.
 
 ## Installation
 
 Node:
 
 ```bash
-$ npm install wrapped
+$ npm install wrap-fn
 ```
 
 Duo:
 
 ```js
-var wrap = require('matthewmueller/wrapped');
+var wrap = require('matthewmueller/wrap-fn');
 ```
 
 ## Example
@@ -31,20 +29,19 @@ function next(err) {
   // Called after
 }
 
-var wrap = wrapped(fn)
-wrap('a', 'b', next)
+wrap(fn, next)('a', 'b')
 ```
 
 ## API
 
-### `wrap(fn)([args, ...], [done])`
+### `wrap(fn, [done])([args, ...])`
 
 Wrap `fn` to support sync, async, promises and generator functions. Call `done` when finished.
 
 `wrap` returns a function which you can pass arguments to or set the context.
 
 ```js
-wrap(fn).call(user, a, b, c, d, next);
+wrap(fn).call(user, a, b, c, d);
 ```
 
 ## Test

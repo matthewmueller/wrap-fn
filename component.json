@@ -1,10 +1,9 @@
 {
-  "name": "wrapped",
-  "version": "1.0.0",
+  "name": "wrap-fn",
+  "version": "0.1.4",
   "description": "support sync, async, and generator functions",
   "dependencies": {
-    "tj/co": "3.1.0",
-    "aheckmann/sliced": "1.0.1"
+    "tj/co": "3.1.0"
   },
   "development": {
     "component/assert": "*",

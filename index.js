@@ -2,35 +2,38 @@
  * Module Dependencies
  */
 
-var sliced = require('sliced');
 var noop = function(){};
 var co = require('co');
 
 /**
- * Export `wrapped`
+ * Export `wrap-fn`
  */
 
-module.exports = wrapped;
+module.exports = wrap;
 
 /**
  * Wrap a function to support
  * sync, async, and gen functions.
  *
  * @param {Function} fn
+ * @param {Function} done
  * @return {Function}
  * @api public
  */
 
-function wrapped(fn) {
-  function wrap() {
-    var args = sliced(arguments);
-    var last = args[args.length - 1];
+function wrap(fn, done) {
+  done = once(done || noop);
+
+  return function() {
+    // prevents arguments leakage
+    // see https://github.com/petkaantonov/bluebird/wiki/Optimization-killers#3-managing-arguments
+    var i = arguments.length;
+    var args = new Array(i);
+    while (i--) args[i] = arguments[i];
+
     var ctx = this;
 
     // done
-    var done = typeof last == 'function' ? args.pop() : noop;
-
-    // nothing
     if (!fn) {
       return done.apply(ctx, [null].concat(args));
     }
@@ -53,8 +56,6 @@ function wrapped(fn) {
     // sync
     return sync(fn, done).apply(ctx, args);
   }
-
-  return wrap;
 }
 
 /**
@@ -110,10 +111,6 @@ function generator(value) {
 function promise(value) {
   return value && 'function' == typeof value.then;
 }
-
-/**
- * Determi
- */
 
 /**
  * Once
